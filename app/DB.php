@@ -11,12 +11,7 @@ class DB
     protected $db;
 
     /**
-     * Routes the URI of the GET method to the specified controller.
-     *
-     * @param  string  $route The user specified route, as it appears in the Request URI
-     * @param  string  $targetControllerPath The fully qualified namespace path to the target controller
-     * @param  string  $controllerMethod The method that will be called in the target controller
-     * @return mix
+     * Populate the server details on instantiation. And create the Database connection.
      */
     public function __construct()
     {
@@ -33,14 +28,12 @@ class DB
     }
 
     /**
-     * Routes the URI of the GET method to the specified controller.
+     * Persists a user to the database.
      *
-     * @param  string  $route The user specified route, as it appears in the Request URI
-     * @param  string  $targetControllerPath The fully qualified namespace path to the target controller
-     * @param  string  $controllerMethod The method that will be called in the target controller
+     * @param  array $user The user data passed in the registration form
      * @return mix
      */
-    public function createUser(array $user): bool
+    public function createUser(array $user)
     {
         try {
             $this->db->autocommit(FALSE);
@@ -69,11 +62,9 @@ class DB
     }
 
     /**
-     * Routes the URI of the GET method to the specified controller.
+     * Updates a user based on the ID.
      *
-     * @param  string  $route The user specified route, as it appears in the Request URI
-     * @param  string  $targetControllerPath The fully qualified namespace path to the target controller
-     * @param  string  $controllerMethod The method that will be called in the target controller
+     * @param  array $user The user data passed in the registration form
      * @return mix
      */
     public function updateUser(array $user): string
@@ -125,11 +116,9 @@ class DB
     }
 
     /**
-     * Routes the URI of the GET method to the specified controller.
+     * Finds and returns all the users in the table.
      *
-     * @param  string  $route The user specified route, as it appears in the Request URI
-     * @param  string  $targetControllerPath The fully qualified namespace path to the target controller
-     * @param  string  $controllerMethod The method that will be called in the target controller
+     * @param  string  $sort The sort order for the query, will sort by name
      * @return mix
      */
     public function getUsers(string $sort){

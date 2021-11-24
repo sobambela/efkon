@@ -7,22 +7,19 @@
 include 'vendor/autoload.php';
 
 use App\Router;
-use App\Controllers\AuthController;
-use App\Controllers\DashboardController;
 use DevCoder\DotEnv;
 
+// Load the env file and make the variable available with the get_env() function
 $absolutePathToEnvFile = __DIR__ . '/.env';
-
 (new DotEnv($absolutePathToEnvFile))->load();
 
+// Necessary request information for proper routing
 $uri = urldecode(
     parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH)
 );
 $method = $_SERVER['REQUEST_METHOD'];
 
 $router = new Router($method, $uri, $_REQUEST);
-$auth = new AuthController();
-$dashboard = new DashboardController();
 
 $router::get('/','App\Controllers\AuthController', 'index');
 $router::get('/register','App\Controllers\AuthController', 'registerIndex');

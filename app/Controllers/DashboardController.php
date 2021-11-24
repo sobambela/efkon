@@ -10,7 +10,8 @@ class DashboardController extends DB
     protected $auth;
 
     /**
-     * Routes the URI of the GET method to the specified controller.
+     * Boots the parent DB class so that the connection is made 
+     * and creates an instance of auth controller to check Authentication.
      *
      * @param  string  $route The user specified route, as it appears in the Request URI
      * @param  string  $targetControllerPath The fully qualified namespace path to the target controller
@@ -25,7 +26,8 @@ class DashboardController extends DB
     }
 
     /**
-     * Routes the URI of the GET method to the specified controller.
+     * Displays the relevant template
+     * Redirects to login if the user is not authenticated.
      */
     public function index(){
         if($this->auth){
@@ -36,7 +38,8 @@ class DashboardController extends DB
     }
 
     /**
-     * Routes the URI of the GET method to the specified controller.
+     * Displays the relevant template
+     * Redirects to login if the user is not authenticated.
      */
     public function profileIndex(){
         if($this->auth){
@@ -46,28 +49,22 @@ class DashboardController extends DB
         }
     }
 
-
     /**
-     * Routes the URI of the GET method to the specified controller.
+     * Responds to the ajax request for all users
      *
-     * @param  string  $route The user specified route, as it appears in the Request URI
-     * @param  string  $targetControllerPath The fully qualified namespace path to the target controller
-     * @param  string  $controllerMethod The method that will be called in the target controller
-     * @return mix
+     * @param  array  $request The request data with the sort order
+     * @return string
      */
-    public function getAllUsers($request){
+    public function getAllUsers(array $request){
         $sort = $request['sort'];
         echo json_encode($this->getUsers($sort));
         die();
     }
 
     /**
-     * Routes the URI of the GET method to the specified controller.
+     * Responds to the ajax request for to get the logged in user
      *
-     * @param  string  $route The user specified route, as it appears in the Request URI
-     * @param  string  $targetControllerPath The fully qualified namespace path to the target controller
-     * @param  string  $controllerMethod The method that will be called in the target controller
-     * @return mix
+     * @return string
      */
     public function getUser(){
         session_start();
@@ -84,12 +81,9 @@ class DashboardController extends DB
     }
     
     /**
-     * Routes the URI of the GET method to the specified controller.
+     * Responds to the ajax request for to updated the logged in user data
      *
-     * @param  string  $route The user specified route, as it appears in the Request URI
-     * @param  string  $targetControllerPath The fully qualified namespace path to the target controller
-     * @param  string  $controllerMethod The method that will be called in the target controller
-     * @return mix
+     * @return string
      */
     public function updateUserProfile(array $request){
         $user = $this->updateUser($request);

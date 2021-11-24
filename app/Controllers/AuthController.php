@@ -8,32 +8,30 @@ use PHPMailer\PHPMailer\PHPMailer;
 class AuthController extends DB
 {
     /**
-     * Routes the URI of the GET method to the specified controller.
+     * Displays the relevant template.
      */
     public function index(){
         require_once 'templates/auth/login.php';
     }
 
     /**
-     * Routes the URI of the GET method to the specified controller.
+     * Displays the relevant template.
      */
     public function registerIndex(){
         require_once 'templates/auth/register.php';
     }
     
     /**
-     * Routes the URI of the GET method to the specified controller.
+     * Displays the relevant template.
      */
     public function resetIndex(){
         require_once 'templates/auth/reset.php';
     }
 
     /**
-     * Routes the URI of the GET method to the specified controller.
+     * Receives registration user data and stores in the database.
      *
-     * @param  string  $route The user specified route, as it appears in the Request URI
-     * @param  string  $targetControllerPath The fully qualified namespace path to the target controller
-     * @param  string  $controllerMethod The method that will be called in the target controller
+     * @param  array $request The user data passed in the registration form
      * @return mix
      */
     public function register(array $request){
@@ -50,11 +48,9 @@ class AuthController extends DB
     }
 
     /**
-     * Routes the URI of the GET method to the specified controller.
+     * Authenticates the user.
      *
-     * @param  string  $route The user specified route, as it appears in the Request URI
-     * @param  string  $targetControllerPath The fully qualified namespace path to the target controller
-     * @param  string  $controllerMethod The method that will be called in the target controller
+     * @param  array $request The user data passed in the login form
      * @return mix
      */
     public function login(array $request){
@@ -80,14 +76,11 @@ class AuthController extends DB
     }
 
     /**
-     * Routes the URI of the GET method to the specified controller.
-     *
-     * @param  string  $route The user specified route, as it appears in the Request URI
-     * @param  string  $targetControllerPath The fully qualified namespace path to the target controller
-     * @param  string  $controllerMethod The method that will be called in the target controller
-     * @return mix
+     * Returns the logged in user.
+     * @return array
      */
-    public function user(){
+    public function user(): array
+    {
         session_start();
         $id = $_SESSION['user_id'];
 
@@ -101,12 +94,8 @@ class AuthController extends DB
     }
 
     /**
-     * Routes the URI of the GET method to the specified controller.
-     *
-     * @param  string  $route The user specified route, as it appears in the Request URI
-     * @param  string  $targetControllerPath The fully qualified namespace path to the target controller
-     * @param  string  $controllerMethod The method that will be called in the target controller
-     * @return mix
+     * Checks if the user is authenticated.
+     * @return bool
      */
     public function check(): bool
     {
@@ -119,12 +108,7 @@ class AuthController extends DB
     }
 
     /**
-     * Routes the URI of the GET method to the specified controller.
-     *
-     * @param  string  $route The user specified route, as it appears in the Request URI
-     * @param  string  $targetControllerPath The fully qualified namespace path to the target controller
-     * @param  string  $controllerMethod The method that will be called in the target controller
-     * @return mix
+     * Logs the user out of the system.
      */
     public function logout(){
         session_start();
@@ -134,11 +118,9 @@ class AuthController extends DB
     }
 
     /**
-     * Routes the URI of the GET method to the specified controller.
+     * Sends the password reset code to the user, Checks the user exists before sending email
      *
-     * @param  string  $route The user specified route, as it appears in the Request URI
-     * @param  string  $targetControllerPath The fully qualified namespace path to the target controller
-     * @param  string  $controllerMethod The method that will be called in the target controller
+     * @param array $request The user specified route, as it appears in the Request URI
      * @return mix
      */
     public function sendResetEmail(array $request){
@@ -170,12 +152,11 @@ class AuthController extends DB
     }
 
     /**
-     * Routes the URI of the GET method to the specified controller.
+     * Sends the password reset code to the user
      *
-     * @param  string  $route The user specified route, as it appears in the Request URI
-     * @param  string  $targetControllerPath The fully qualified namespace path to the target controller
-     * @param  string  $controllerMethod The method that will be called in the target controller
-     * @return mix
+     * @param  string  $email User email address
+     * @param  string  $resetCode The password reset code
+     * @return string
      */
     public function sendEmail(string $email, string $resetCode)
     {
@@ -206,12 +187,10 @@ class AuthController extends DB
     }
 
     /**
-     * Routes the URI of the GET method to the specified controller.
+     * Validates the password reset code supplied by the user.
      *
-     * @param  string  $route The user specified route, as it appears in the Request URI
-     * @param  string  $targetControllerPath The fully qualified namespace path to the target controller
-     * @param  string  $controllerMethod The method that will be called in the target controller
-     * @return mix
+     * @param  array  $request The form data from the request
+     * @return string
      */
     public function verifyPasswordResetCode(array $request)
     {
@@ -234,12 +213,10 @@ class AuthController extends DB
     }
 
     /**
-     * Routes the URI of the GET method to the specified controller.
+     * Resets the user password and nullifies the password reset code.
      *
-     * @param  string  $route The user specified route, as it appears in the Request URI
-     * @param  string  $targetControllerPath The fully qualified namespace path to the target controller
-     * @param  string  $controllerMethod The method that will be called in the target controller
-     * @return mix
+     * @param  array  $request The form data from the request
+     * @return string
      */
     public function resetPassword(array $request)
     {
