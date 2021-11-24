@@ -7,6 +7,12 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'Test\\DevCoder\\' => array($vendorDir . '/devcoder-xyz/php-dotenv/tests'),
+    'Psr\\Http\\Message\\' => array($vendorDir . '/psr/http-message/src', $vendorDir . '/psr/http-factory/src'),
+    'Psr\\Http\\Client\\' => array($vendorDir . '/psr/http-client/src'),
+    'PHPMailer\\PHPMailer\\' => array($vendorDir . '/phpmailer/phpmailer/src'),
+    'GuzzleHttp\\Psr7\\' => array($vendorDir . '/guzzlehttp/psr7/src'),
+    'GuzzleHttp\\Promise\\' => array($vendorDir . '/guzzlehttp/promises/src'),
+    'GuzzleHttp\\' => array($vendorDir . '/guzzlehttp/guzzle/src'),
     'DevCoder\\' => array($vendorDir . '/devcoder-xyz/php-dotenv/src'),
     'App\\' => array($baseDir . '/app'),
 );

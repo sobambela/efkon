@@ -14,7 +14,15 @@ require_once  __DIR__.'/../includes/header.php';
             <label for="password" class="col-lg-12 center-text login-response" v-if="step == 3">Enter New Password.</label>
             <input type="password" name="email" id="email" class="form-control"  v-if="step == 3" placeholder="New Password" v-model="password" autofocus>
             <input type="hidden" name="redirect" id="redirect">
-            <button class="btn btn-lg btn-login btn-block" type="submit">
+            <button class="btn btn-lg btn-login btn-block" type="submit" v-if="step == 1" v-on:click.prevent="sendResetEmail">
+                <img src="img/ajax-loader-2.gif" class="loader" v-if="loading" />
+                Get Reset Code
+            </button>
+            <button class="btn btn-lg btn-login btn-block" type="submit" v-if="step == 2"  v-on:click.prevent="confirmResetCode">
+                <img src="img/ajax-loader-2.gif" class="loader" v-if="loading" />
+                Submit
+            </button>
+            <button class="btn btn-lg btn-login btn-block" type="submit" v-if="step == 3"  v-on:click.prevent="resetPassword">
                 <img src="img/ajax-loader-2.gif" class="loader" v-if="loading" />
                 Reset Password
             </button>

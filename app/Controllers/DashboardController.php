@@ -63,8 +63,4 @@ class DashboardController extends DB
         echo json_encode($user);
         die();
     }
-
-    public function updateProfile(){
-        
-    }
 }

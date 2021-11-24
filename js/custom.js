@@ -146,33 +146,97 @@ $(function(){
           email: '',
           password: '',
           resetCode: '',
+          password: '',
           loading: false,
           updateSuccess: null,
           responseMessage: '',
           step: 1,
         },
         methods: {
-            getUser(){
+            sendResetEmail(){
                 var vm = this;
-                var id = (vm.$refs.userId !== undefined)?vm.$refs.userId.value : '';
-                axios.post('/user',{ 'user_id': id})
+                vm.loading = true;
+                var data = new FormData();
+                data.append('email', vm.email);
+                axios(
+                {
+                    method: 'post',
+                    url: '/password_reset_email',
+                    data: data,
+                    headers: { "Content-Type": "multipart/form-data" }
+                })
                 .then(function (response) {
                     // handle success
-                    vm.user = response.data;
+                    vm.updateSuccess = response.data.success;
+                    if(vm.updateSuccess){
+                        vm.responseMessage = response.data.message;
+                        vm.step++;
+                    }else{
+                        vm.responseMessage = response.data.message
+                    }
+                    vm.loading = false;
                 })
                 .catch(function (error) {
                     // handle error
                     console.log(error);
+                    vm.loading = false;
                 });
             },
-            updateUser(){
+            confirmResetCode(){
                 var vm = this;
                 vm.loading = true;
-                axios.post('/update-user',{ user: vm.user })
+                var data = new FormData();
+                data.append('email', vm.email);
+                data.append('code', vm.resetCode);
+                axios(
+                {
+                    method: 'post',
+                    url: '/password_reset_code',
+                    data: data,
+                    headers: { "Content-Type": "multipart/form-data" }
+                })
                 .then(function (response) {
                     // handle success
-                    vm.updateSuccess = response.data.success
-                    vm.responseMessage = response.data.message
+                    vm.updateSuccess = response.data.success;
+                    if(vm.updateSuccess){
+                        vm.responseMessage = response.data.message;
+                        vm.step++;
+                    }else{
+                        vm.responseMessage = response.data.message
+                    }
+                    vm.loading = false;
+                })
+                .catch(function (error) {
+                    // handle error
+                    console.log(error);
+                    vm.loading = false;
+                });
+            },
+            resetPassword(){
+                var vm = this;
+                vm.loading = true;
+                var data = new FormData();
+                data.append('email', vm.email);
+                data.append('password', vm.password);
+                axios(
+                {
+                    method: 'post',
+                    url: '/password_reset',
+                    data: data,
+                    headers: { "Content-Type": "multipart/form-data" }
+                })
+                .then(function (response) {
+                    // handle success
+                    vm.updateSuccess = response.data.success;
+                    if(vm.updateSuccess){
+                        vm.responseMessage = response.data.message;
+                        // Redirect to login
+                        setTimeout(function(){
+                            location.href = '/';
+                        }, 2000);
+                    }else{
+                        vm.responseMessage = response.data.message
+                    }
                     vm.loading = false;
                 })
                 .catch(function (error) {
