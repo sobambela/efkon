@@ -101,10 +101,9 @@ class DB
     }
 
     public function getUsers(string $sort){
-        $sql = "SELECT `id`, `name`, `surname`, `gender`, `contact_number`, `email`, `password` FROM users ORDER BY name $sort";
-        $stmt = $this->db->prepare($sql);
-        $stmt->execute();
-        $result = $stmt->get_result();
+        $sort = $sort;
+        $sql = "SELECT id, name, surname, gender, contact_number, email, password FROM users ORDER BY name $sort";
+        $result = $this->db->query($sql);
         $results = [];
         while($row = $result->fetch_assoc()) {
             array_push($results, [

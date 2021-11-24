@@ -20,9 +20,22 @@ $uri = urldecode(
 );
 $method = $_SERVER['REQUEST_METHOD'];
 
-$router = new Router($method, $uri);
+$router = new Router($method, $uri, $_REQUEST);
 $auth = new AuthController();
 $dashboard = new DashboardController();
+
+$router::get('/','App\Controllers\AuthController', 'index');
+$router::get('/register','App\Controllers\AuthController', 'registerIndex');
+$router::post('/register','App\Controllers\AuthController', 'register');
+$router::post('/login','App\Controllers\AuthController', 'login');
+$router::get('/dashboard','App\Controllers\DashboardController', 'index');
+$router::post('/users','App\Controllers\DashboardController', 'getAllUsers');
+$router::get('/profile','App\Controllers\DashboardController', 'profileIndex');
+$router::post('/profile','App\Controllers\DashboardController', 'updateUserProfile');
+$router::post('/user','App\Controllers\DashboardController', 'getUser');
+$router::post('/update-user','App\Controllers\DashboardController', 'updateUserProfile');
+
+$router::get('/logout','App\Controllers\AuthController', 'logout');
 
 
 

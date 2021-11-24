@@ -3,13 +3,41 @@
 namespace App\Controllers;
 
 use App\DB;
+use App\Controllers\AuthController;
 
 class DashboardController extends DB
 {
-    public function index(){
-        require_once 'templates/dashboard.php';
+    protected $auth;
+
+    public function __construct()
+    {
+        parent::__construct();
+        $auth = new AuthController;
+        $this->auth = $auth->check();
     }
 
+    public function index(){
+        if($this->auth){
+            require_once 'templates/dashboard.php';
+        }else{
+            header('Location: /');
+        }
+    }
+
+    public function profileIndex(){
+        if($this->auth){
+            require_once 'templates/profile.php';
+        }else{
+            header('Location: /');
+        }
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  \App\Models\Fish  $Fish
+     * @return \Illuminate\Http\Response
+     */
     public function getAllUsers($request){
         $sort = $request['sort'];
         echo json_encode($this->getUsers($sort));
@@ -31,7 +59,7 @@ class DashboardController extends DB
     }
     
     public function updateUserProfile(array $request){
-        $user = $this->updateUser($request['user']);
+        $user = $this->updateUser($request);
         echo json_encode($user);
         die();
     }

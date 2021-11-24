@@ -6,6 +6,14 @@ use App\DB;
 
 class AuthController extends DB
 {
+    public function index(){
+        require_once 'templates/auth/login.php';
+    }
+
+    public function registerIndex(){
+        require_once 'templates/auth/register.php';
+    }
+
     public function register(array $request){
         $user_id = $this->createUser($request);
         if($user_id){

@@ -45,7 +45,16 @@ $(function(){
             },
             getUsers(){
                 var vm = this;
-                axios.post('/users',{ 'sort': vm.sort})
+                var data = new FormData();
+                data.append('sort', vm.sort);
+                axios(
+                    {
+                        method: 'post',
+                        url: '/users',
+                        data: data,
+                        headers: { "Content-Type": "multipart/form-data" }
+                    }   
+                )
                 .then(function (response) {
                     // handle success
                     vm.users = response.data;
@@ -74,7 +83,16 @@ $(function(){
             getUser(){
                 var vm = this;
                 var id = (vm.$refs.userId !== undefined)?vm.$refs.userId.value : '';
-                axios.post('/user',{ 'user_id': id})
+                var data = new FormData();
+                data.append('user_id', id);
+                axios(
+                    {
+                        method: 'post',
+                        url: '/user',
+                        data: data,
+                        headers: { "Content-Type": "multipart/form-data" }
+                    }
+                )
                 .then(function (response) {
                     // handle success
                     vm.user = response.data;
@@ -87,7 +105,22 @@ $(function(){
             updateUser(){
                 var vm = this;
                 vm.loading = true;
-                axios.post('/update-user',{ user: vm.user })
+                var data = new FormData();
+                data.append('id', vm.user.id);
+                data.append('name', vm.user.name);
+                data.append('email', vm.user.email);
+                data.append('surname', vm.user.surname);
+                data.append('gender', vm.user.gender);
+                data.append('contact_number', vm.user.contact_number);
+                data.append('old_password', vm.user.old_password);
+                data.append('new_password', vm.user.new_password);
+                axios(
+                {
+                    method: 'post',
+                    url: '/update-user',
+                    data: data,
+                    headers: { "Content-Type": "multipart/form-data" }
+                })
                 .then(function (response) {
                     // handle success
                     vm.updateSuccess = response.data.success
