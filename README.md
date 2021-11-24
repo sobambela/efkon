@@ -1,8 +1,11 @@
 # Efkon Assessment
 
-## Requirements
+## Built in:
 - PHP 8
 - MySql
+- Bootstrap
+- VueJS
+- Axios
 
 ## Usage
 
