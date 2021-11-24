@@ -70,6 +70,8 @@ class AuthController extends DB
                 $_SESSION['guest'] = false;
                 $_SESSION['user_id'] = $user['id'];
                 header('Location: /dashboard');
+            }else{
+                header('Location: /');
             }
         }
         return false;
