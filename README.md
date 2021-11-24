@@ -7,6 +7,9 @@
 - VueJS
 - Axios
 
+- The app PHP code is located /app
+- The app Templates are located /templates
+- The VueJS code is located in /js/custom.js
 ## Usage
 
 - Clone the project repo 
