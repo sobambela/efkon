@@ -1,5 +1,21 @@
 $(function(){
-    
+    $("form[name='login-form']").validate({
+        // Specify validation rules
+        rules: {
+            email: {
+                required: true,
+                email: true
+            },
+            password: {
+                required: true,
+                minlength: 5
+            }
+        },
+        submitHandler: function(form) {
+          form.submit();
+        }
+    });
+
     $("form[name='registration']").validate({
         // Specify validation rules
         rules: {
@@ -25,7 +41,7 @@ $(function(){
         submitHandler: function(form) {
           form.submit();
         }
-    });
+    }); 
 
     var dashboardApp = new Vue({
         el: '#dashboard-app',

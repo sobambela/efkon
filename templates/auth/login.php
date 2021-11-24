@@ -2,11 +2,14 @@
 require_once __DIR__.'/../includes/header.php';
 ?>
     <section class="wrapper">
-        <form class="form-signin" id="login-form" name="registration" method="post" action="/login">
+        <form class="form-signin" id="login-form" name="login-form" method="post" action="/login">
             <h2 class="form-signin-heading">sign in now</h2>
             <div class="login-wrap">
-                <?php if(isset($invalid) && $invalid === true){  ?>
+                <?php if(isset($_GET['inv']) && $_GET['inv'] == 1){  ?>
                 <label for="password" class="col-lg-12 center-text login-response error" >Invalid Credentials</label>
+                <?php }  ?>
+                <?php if(isset($_GET['inv']) && $_GET['inv'] == 2){  ?>
+                <label for="password" class="col-lg-12 center-text login-response error" >Username and email are required</label>
                 <?php }  ?>
                 <input type="text" name="email" id="email" class="form-control" placeholder="Email" autofocus>
                 <input type="password" name="password" id="password" class="form-control" placeholder="Password">

@@ -71,10 +71,10 @@ class AuthController extends DB
                 $_SESSION['user_id'] = $user['id'];
                 header('Location: /dashboard');
             }else{
-                header('Location: /');
+                header('Location: /?inv=1');
             }
         }
-        return false;
+        header('Location: /?inv=2');
     }
 
     /**
