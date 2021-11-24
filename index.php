@@ -10,9 +10,7 @@ use App\Router;
 use App\Controllers\AuthController;
 use App\Controllers\DashboardController;
 use DevCoder\DotEnv;
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
+
 $absolutePathToEnvFile = __DIR__ . '/.env';
 
 (new DotEnv($absolutePathToEnvFile))->load();
