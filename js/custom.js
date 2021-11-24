@@ -35,7 +35,10 @@ $(function(){
         },
         data: {
           users: [],
-          sort: 'ASC'
+          equinox: [],
+          sort: 'ASC',
+          year: '',
+          loading: false,
         },
         methods: {
             sortUsers(){
@@ -63,6 +66,36 @@ $(function(){
                     // handle error
                     console.log(error);
                 });
+            },
+            getEquinoxDates(year){
+                var vm = this;
+                var data;
+                axios(
+                    {
+                        method: 'get',
+                        url: '/equinox.php?year='+year,
+                        headers: { "Content-Type": "multipart/form-data" }
+                    }   
+                )
+                .then(function (response) {
+                    // handle success
+                    vm.equinox.push({
+                        'year': year,
+                        'date': response.data.equinox_time
+                    })
+                })
+                .catch(function (error) {
+                    // handle error
+                    console.log(error);
+                });
+                return data;
+            },
+            equinoxDates(){
+                var year = Number(this.year);
+                for (let index = 1; index <= 10; index++) {
+                    this.getEquinoxDates(year);
+                    year++;
+                }
             }
         }
     });
@@ -135,7 +168,6 @@ $(function(){
             }
         }
     });
-
 
     var resetApp = new Vue({
         el: '#reset-app',

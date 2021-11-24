@@ -9,6 +9,14 @@ class DashboardController extends DB
 {
     protected $auth;
 
+    /**
+     * Routes the URI of the GET method to the specified controller.
+     *
+     * @param  string  $route The user specified route, as it appears in the Request URI
+     * @param  string  $targetControllerPath The fully qualified namespace path to the target controller
+     * @param  string  $controllerMethod The method that will be called in the target controller
+     * @return mix
+     */
     public function __construct()
     {
         parent::__construct();
@@ -16,6 +24,9 @@ class DashboardController extends DB
         $this->auth = $auth->check();
     }
 
+    /**
+     * Routes the URI of the GET method to the specified controller.
+     */
     public function index(){
         if($this->auth){
             require_once 'templates/dashboard.php';
@@ -24,6 +35,9 @@ class DashboardController extends DB
         }
     }
 
+    /**
+     * Routes the URI of the GET method to the specified controller.
+     */
     public function profileIndex(){
         if($this->auth){
             require_once 'templates/profile.php';
@@ -32,11 +46,14 @@ class DashboardController extends DB
         }
     }
 
+
     /**
-     * Remove the specified resource from storage.
+     * Routes the URI of the GET method to the specified controller.
      *
-     * @param  \App\Models\Fish  $Fish
-     * @return \Illuminate\Http\Response
+     * @param  string  $route The user specified route, as it appears in the Request URI
+     * @param  string  $targetControllerPath The fully qualified namespace path to the target controller
+     * @param  string  $controllerMethod The method that will be called in the target controller
+     * @return mix
      */
     public function getAllUsers($request){
         $sort = $request['sort'];
@@ -44,6 +61,14 @@ class DashboardController extends DB
         die();
     }
 
+    /**
+     * Routes the URI of the GET method to the specified controller.
+     *
+     * @param  string  $route The user specified route, as it appears in the Request URI
+     * @param  string  $targetControllerPath The fully qualified namespace path to the target controller
+     * @param  string  $controllerMethod The method that will be called in the target controller
+     * @return mix
+     */
     public function getUser(){
         session_start();
         $id = $_SESSION['user_id'];
@@ -58,6 +83,14 @@ class DashboardController extends DB
         die();
     }
     
+    /**
+     * Routes the URI of the GET method to the specified controller.
+     *
+     * @param  string  $route The user specified route, as it appears in the Request URI
+     * @param  string  $targetControllerPath The fully qualified namespace path to the target controller
+     * @param  string  $controllerMethod The method that will be called in the target controller
+     * @return mix
+     */
     public function updateUserProfile(array $request){
         $user = $this->updateUser($request);
         echo json_encode($user);

@@ -10,6 +10,14 @@ class DB
     protected $databasePassword;
     protected $db;
 
+    /**
+     * Routes the URI of the GET method to the specified controller.
+     *
+     * @param  string  $route The user specified route, as it appears in the Request URI
+     * @param  string  $targetControllerPath The fully qualified namespace path to the target controller
+     * @param  string  $controllerMethod The method that will be called in the target controller
+     * @return mix
+     */
     public function __construct()
     {
         $this->serverName = getenv('DATABASE_HOST');
@@ -24,6 +32,14 @@ class DB
         }
     }
 
+    /**
+     * Routes the URI of the GET method to the specified controller.
+     *
+     * @param  string  $route The user specified route, as it appears in the Request URI
+     * @param  string  $targetControllerPath The fully qualified namespace path to the target controller
+     * @param  string  $controllerMethod The method that will be called in the target controller
+     * @return mix
+     */
     public function createUser(array $user): bool
     {
         try {
@@ -52,6 +68,14 @@ class DB
         }
     }
 
+    /**
+     * Routes the URI of the GET method to the specified controller.
+     *
+     * @param  string  $route The user specified route, as it appears in the Request URI
+     * @param  string  $targetControllerPath The fully qualified namespace path to the target controller
+     * @param  string  $controllerMethod The method that will be called in the target controller
+     * @return mix
+     */
     public function updateUser(array $user): string
     {
         try {
@@ -100,6 +124,14 @@ class DB
         }
     }
 
+    /**
+     * Routes the URI of the GET method to the specified controller.
+     *
+     * @param  string  $route The user specified route, as it appears in the Request URI
+     * @param  string  $targetControllerPath The fully qualified namespace path to the target controller
+     * @param  string  $controllerMethod The method that will be called in the target controller
+     * @return mix
+     */
     public function getUsers(string $sort){
         $sort = $sort;
         $sql = "SELECT id, name, surname, gender, contact_number, email, password FROM users ORDER BY name $sort";
