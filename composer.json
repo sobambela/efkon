@@ -1,0 +1,22 @@
+{
+    "name": "yongama/efkon-assessment",
+    "description": "Efkon PHP Development assessment",
+    "type": "project",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "App\\": "./app"
+        }
+    },
+    "authors": [
+        {
+            "name": "Yongama",
+            "email": "sobambela@gmail.com"
+        }
+    ],
+    "require": {
+        "guzzlehttp/guzzle": "^7.4",
+        "phpmailer/phpmailer": "^6.5",
+        "devcoder-xyz/php-dotenv": "^1.1"
+    }
+}
