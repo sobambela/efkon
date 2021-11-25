@@ -5,7 +5,9 @@ require_once __DIR__.'/../includes/header.php';
         <form class="form-signin" id="register-form" name="registration" method="post" action="/register">
             <h2 class="form-signin-heading">Register in now</h2>
             <div class="login-wrap">
-                <label for="password" class="col-lg-12 center-text login-response" style="display: none;">This field is required.</label>
+                <?php if(isset($_GET['err']) && $_GET['err'] == 1){  ?>
+                <label for="password" class="col-lg-12 center-text login-response error" >Email already exists</label>
+                <?php }  ?>
                 <input type="text" name="name" id="name" class="form-control" placeholder="Name" autofocus>
                 <input type="text" name="surname" id="surname" class="form-control" placeholder="Surname" autofocus>
                 <select name="gender" id="gender" class="form-control">

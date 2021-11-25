@@ -43,7 +43,7 @@ class AuthController extends DB
             header('Location: /dashboard');
         }else{
             $_SESSION['guest'] = true;
-            header('Location: /register');
+            header('Location: /register?err=1');
         }
     }
 
@@ -73,8 +73,9 @@ class AuthController extends DB
             }else{
                 header('Location: /?inv=1');
             }
+        }else{
+            header('Location: /?inv=2');
         }
-        header('Location: /?inv=2');
     }
 
     /**
