@@ -8,7 +8,9 @@ include 'vendor/autoload.php';
 
 use App\Router;
 use DevCoder\DotEnv;
-
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 // Load the env file and make the variable available with the get_env() function
 $absolutePathToEnvFile = __DIR__ . '/.env';
 (new DotEnv($absolutePathToEnvFile))->load();
